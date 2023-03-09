@@ -14,7 +14,7 @@ photo_height = 472
 choise_photo_format = tk.IntVar()
 choise_photo_format.set(0)
 
-tmp_image = Image.open("./default_img.jpg")
+tmp_image = Image.new("RGB", (1000, 1000), (255, 255, 255))
 tmp_processed_image = tmp_image
 final_image = tmp_image
 
