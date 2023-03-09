@@ -1,14 +1,17 @@
 import tkinter as tk
 from tkinter import filedialog
-from PIL import Image, ImageOps, ImageTk, ImageFilter
+from PIL import Image, ImageTk
 import math
+import platform
 
 root = tk.Tk()
 root.geometry("800x800")
 root.title("Image Editor Tool")
-root.attributes('-zoomed', True)
 root.config(bg="white")
-
+if (platform.system() == "Linux"):
+    root.attributes('-zoomed', True)
+elif (platform.system() == "Windows"):
+    root.state("zoomed")
 photo_width = 354
 photo_height = 472
 choise_photo_format = tk.IntVar()
