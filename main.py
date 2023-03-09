@@ -24,7 +24,7 @@ right_cropping = photo_width
 bottom_cropping =  photo_height
 
 def searchImage():
-    global file_path, tmp_image, tmp_processed_image, photo_height, photo_width
+    global tmp_image, tmp_processed_image, photo_height, photo_width
     file_path = filedialog.askopenfilename(initialdir="/home/gilson/Pictures")
     original_image = Image.open(file_path)
     new_width, new_height = int(original_image.width / 2), int(original_image.height / 2)
@@ -93,7 +93,8 @@ def horizontalCropping(value):
     renderImage(final_image)
 
 def saveImage():
-    generatePhoto().save("output.jpg")
+    file_path = filedialog.asksaveasfilename(initialdir="/home/gilson/Pictures", confirmoverwrite=True, defaultextension=".jpg")
+    generatePhoto().save(file_path)
 
 def generatePhoto():
     global tmp_complete_photo
