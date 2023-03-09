@@ -29,19 +29,22 @@ bottom_cropping =  photo_height
 def searchImage():
     global tmp_image, tmp_processed_image, photo_height, photo_width
     file_path = filedialog.askopenfilename(initialdir="/home/gilson/Pictures")
-    original_image = Image.open(file_path)
-    new_width, new_height = int(original_image.width / 2), int(original_image.height / 2)
-    tmp_image = original_image.resize((new_width, new_height), Image.LANCZOS)
-    tmp_processed_image = tmp_image
-    updateComponents()
-    restoreComponents()
-    min_scale_h = photo_height / tmp_processed_image.height * 100
-    min_scale_w = photo_width / tmp_processed_image.width * 100
-    if(min_scale_h > min_scale_w):
-        scale_resize_btn.config(from_= math.ceil(min_scale_h))
-    else:
-        scale_resize_btn.config(from_= math.ceil(min_scale_w))
-    renderImage(tmp_image)
+    try:
+        original_image = Image.open(file_path)
+        new_width, new_height = int(original_image.width / 2), int(original_image.height / 2)
+        tmp_image = original_image.resize((new_width, new_height), Image.LANCZOS)
+        tmp_processed_image = tmp_image
+        updateComponents()
+        restoreComponents()
+        min_scale_h = photo_height / tmp_processed_image.height * 100
+        min_scale_w = photo_width / tmp_processed_image.width * 100
+        if(min_scale_h > min_scale_w):
+            scale_resize_btn.config(from_= math.ceil(min_scale_h))
+        else:
+            scale_resize_btn.config(from_= math.ceil(min_scale_w))
+        renderImage(tmp_image)
+    except:
+        print("Incorrect file loaded")
     
 def updateComponents():
     horizontal_cropping_btn.config(to=tmp_processed_image.width - photo_width)
@@ -97,7 +100,10 @@ def horizontalCropping(value):
 
 def saveImage():
     file_path = filedialog.asksaveasfilename(initialdir="/home/gilson/Pictures", confirmoverwrite=True, defaultextension=".jpg")
-    generatePhoto().save(file_path)
+    try:
+        generatePhoto().save(file_path)
+    except:
+        print("Incorrect file loaded")
 
 def generatePhoto():
     global tmp_complete_photo
