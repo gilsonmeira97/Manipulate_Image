@@ -28,7 +28,7 @@ pip install -r ./requirements.txt
 ```
 <br>
 
-Após isso, basta rodar o comando: 
+After that, just run the command:
 ```
 python ./main.py
 ```
